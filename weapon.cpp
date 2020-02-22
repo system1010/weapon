@@ -3,22 +3,23 @@ using namespace std;
 
 
 class Weapon{
-	public:
   char *Shoot;
+  public:
   friend ostream& operator<<(ostream&, Weapon&);
-
+  char* get(){return Shoot;}
+  void set(char *shoot){Shoot=shoot;}
 };
 
 ostream& operator << (ostream& out, Weapon& w)
 {
-    out << w.Shoot << endl;
+    out << w.get() << endl;
     return out;
 }
 
 class Knife: public Weapon{
 	public:
 		Knife(){
-    Shoot = "VJUM!!!";
+    set("VJUM!!!");
     }
 
 };
@@ -26,7 +27,7 @@ class Gun: public Weapon
 {
 	public:
 		Gun(){
-  	Shoot= "BANG!";
+  	set("BANG!");
 		}
 };
 
@@ -34,7 +35,7 @@ class SubmashineGun: public Weapon
 {
 	public:
 	SubmashineGun(){
-	Shoot= "BANG! BANG! BANG!";
+	set("BANG! BANG! BANG!");
 	}
 };
 
@@ -42,7 +43,7 @@ class Bazooka: public Weapon
 {
 	public:
 	Bazooka(){
-	Shoot= "BADABUB!!!";
+	set("BADABUB!!!");
 	}
 };
 
