@@ -1,1 +1,6 @@
 # weapon
+
+
+make
+
+./a.out
