@@ -6,7 +6,7 @@ make
 ./a.out
 
 
-https://yadi.sk/d/PucyscDzM7351g
+https://yadi.sk/d/PucyscDzM7351g  colobot
 
 
 
