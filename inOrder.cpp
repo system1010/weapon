@@ -1,19 +1,15 @@
 #include<stdio.h>
 #include<stdlib.h>
-//#include<limits.h>
 
 struct Node
 {
 char data;
 struct Node *left, *right;
-
 Node(char dat)
 {
-	//struct Node* Node = (struct Node*)malloc(sizeof(struct Node));
         data = dat;
         left = NULL;
         right = NULL;
-//        return(Node);
 }
 };
 
@@ -25,18 +21,14 @@ struct Stack
 
 Stack(unsigned capacity)
 {
-//struct Stack* stack = (struct Stack*) malloc(sizeof(struct Stack));
 capacity = capacity;
 top = 0;
-//stack->array = (struct Node*) malloc(stack->capacity * sizeof(struct Node));
-//return stack;
 }
 void push(struct Node* item)
 {
 //if (isFull(stack))
 //return;
 array[++top] = item;
-//printf("%c pushed to stackn", item->data);
 }
 struct Node* pop()
 {
@@ -45,10 +37,10 @@ struct Node* pop()
 return array[top--];
 }
 };
-//int isFull(struct Stack* stack)
-//{ return stack->top == stack->capacity - 1; }
-//int isEmpty(struct Stack* stack)
-//{ return stack->top == -1; }
+int isFull(struct Stack* stack)
+{ return stack->top == stack->capacity - 1; }
+int isEmpty(struct Stack* stack)
+{ return stack->top == -1; }
 
 void visit(struct Node* current ) {
 	printf("%c ", current->data);
@@ -101,5 +93,27 @@ while(1){
 break;
 }
 //}while(stack->top || P);
+struct Stack* s1 = new Stack(100);
+struct Stack* s2 = new Stack(100);
+
+ struct Node* node=new Node('N');
+
+ // push root to first stack
+  s1->push(root);
+   //Node* node;
+   // Run while first stack is not empty
+  while (s1->top) {
+  // Pop an item from s1 and push it to s2
+  //node = s1->top;
+  node=s1->pop();
+  s2->push(node);
+  // Push left and right children
+  // of removed item to s1
+  if (node->left)s1->push(node->left);
+  if (node->right)s1->push(node->right);
+   }
+printf("\n");
+  while(s2->top)
+  visit(s2->pop());
 return 0;
 }
