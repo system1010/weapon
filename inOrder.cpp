@@ -1,5 +1,5 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include<iostream>
+//#include<stdlib.h>
 
 struct Node
 {
@@ -26,22 +26,21 @@ top = 0;
 }
 void push(struct Node* item)
 {
-//if (isFull(stack))
-//return;
+if (isFull())
+return;
 array[++top] = item;
 }
 struct Node* pop()
 {
-//if (isEmpty(stack))
-//return INT_MIN;
+if (isEmpty())
+return NULL;
 return array[top--];
 }
+int isFull()
+{ return top == capacity - 1; }
+int isEmpty()
+{ return top == -1; }
 };
-int isFull(struct Stack* stack)
-{ return stack->top == stack->capacity - 1; }
-int isEmpty(struct Stack* stack)
-{ return stack->top == -1; }
-
 void visit(struct Node* current ) {
 	printf("%c ", current->data);
 }
@@ -93,6 +92,27 @@ while(1){
 break;
 }
 //}while(stack->top || P);
+
+printf(" inOrder\n");
+
+P=root;
+
+
+while(1){
+        if(P){
+        stack->push(P);
+        visit(P);
+        P=P->left;
+        continue;
+        }else if (stack->top){
+        P=stack->pop();
+        //     visit(P);
+        P=P->right;
+        continue;
+        }
+break;
+}
+
 struct Stack* s1 = new Stack(100);
 struct Stack* s2 = new Stack(100);
 
@@ -112,8 +132,51 @@ struct Stack* s2 = new Stack(100);
   if (node->left)s1->push(node->left);
   if (node->right)s1->push(node->right);
    }
-printf("\n");
+printf(" preOrder \n");
   while(s2->top)
   visit(s2->pop());
+  printf(" postOrder \n");
 return 0;
 }
+
+/*
+
+Time Complexity: O(n)
+Let us see different corner cases.
+Complexity function T(n) — for all problem where tree traversal is involved — can be defined as:
+
+
+
+
+T(n) = T(k) + T(n – k – 1) + c
+
+Where k is the number of nodes on one side of root and n-k-1 on the other side.
+
+Let’s do an analysis of boundary conditions
+
+Case 1: Skewed tree (One of the subtrees is empty and other subtree is non-empty )
+
+k is 0 in this case.
+T(n) = T(0) + T(n-1) + c
+T(n) = 2T(0) + T(n-2) + 2c
+T(n) = 3T(0) + T(n-3) + 3c
+T(n) = 4T(0) + T(n-4) + 4c
+
+…………………………………………
+………………………………………….
+T(n) = (n-1)T(0) + T(1) + (n-1)c
+T(n) = nT(0) + (n)c
+
+Value of T(0) will be some constant say d. (traversing a empty tree will take some constants time)
+
+  T(n) = n(c+d)
+  T(n) = Θ(n) (Theta of n)
+
+  Case 2: Both left and right subtrees have equal number of nodes.
+
+  T(n) = 2T(|_n/2_|) + c
+
+  This recursive function is in the standard form (T(n) = aT(n/b) + (-)(n) ) for master method http://en.wikipedia.org/wiki/Master_theorem. If we solve it by master method we get (-)(n)
+
+  Auxiliary Space : If we don’t consider size of stack for function calls then O(1) otherwise O(n).
+  */
